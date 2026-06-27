@@ -9,6 +9,7 @@
                  [environ "1.2.0"]
                  [cheshire "6.2.0"]  
                  [metosin/reitit "0.10.1"]
+                 #_[metosin/ring-http-response "0.9.5"]
                  [fi.metosin/reitit-openapi "0.10.1"]
                  [metosin/reitit-swagger-ui "0.10.1"]
                  [metosin/jsonista "0.3.13"]
