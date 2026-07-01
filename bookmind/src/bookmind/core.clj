@@ -11,7 +11,15 @@
     (stop-fn :timeout 100)
     (reset! server nil)))
 
-(defn -main [& _]
+(defn start-server []
   (reset! server
-          (http/run-server #'handler {:port 8080}))
+          (http/run-server #'handler {:port 8080})))
+
+(defn reset-server []
+  (stop-server)
+  (start-server))
+
+ 
+(defn -main [& _]
+  (start-server)
   (println "Listening on http://localhost:8080/docs"))

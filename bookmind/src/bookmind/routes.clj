@@ -7,7 +7,8 @@
    [reitit.openapi :as openapi]
    [reitit.ring.coercion :as coercion]
    [reitit.coercion.schema]
-   [schema.core :as s]))
+   [schema.core :as s]
+   [bookmind.services.internet-archive.router :as int-arc]))
 
 (s/defschema Address
   {:street s/Str
@@ -18,7 +19,9 @@
    :name s/Str
    :address Address})
 
-(def routes
+(defn routes 
+  "Global routes of the project."
+  [] 
   [["/openapi.json"
     {:get {:no-doc true
            :handler (openapi/create-openapi-handler)}}]
@@ -30,11 +33,13 @@
             :responses {200 {:body User}}
             :handler (fn [{{body :body} :parameters}]
                        {:status 200
-                        :body body})}}]])
+                        :body body})}}]
+   (int-arc/routes)])
 
-(def router
+
+(defn router []
   (ring/router
-   routes
+   (routes)
    {:data {:muuntaja m/instance
            :middleware [params/wrap-params
                         muuntaja/wrap-format
